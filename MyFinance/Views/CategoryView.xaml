@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="MyFinance.Views.CategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyFinance.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="750">
+    <UserControl.Resources>
+        <local:TotalExpenseConverter x:Key="TotalExpenseConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF1A3536"/>
+                <GradientStop Color="#FF677C69" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Список категорій -->
+        <ListView x:Name="CategoriesListView" Grid.Column="0" Grid.Row="0" SelectionChanged="CategoriesListView_SelectionChanged" Background="#FF677C69">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Transactions" DisplayMemberBinding="{Binding Transactions.Count}"/>
+                    <GridViewColumn Header="Total Expenses" DisplayMemberBinding="{Binding Transactions, Converter={StaticResource TotalExpenseConverter}}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Транзакції у вибраній категорії -->
+        <ListView x:Name="TransactionsListView" Grid.Column="1" Grid.Row="0" Background="#FF677C69">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Панель кнопок -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Add Category" Click="AddCategory_Click" Width="100" Height="30" Margin="5" Foreground="#FFD8BC97" BorderBrush="#FF1A3637">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF40534D"/>
+                        <GradientStop Color="#FF1A3637" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Edit Category" Click="EditCategory_Click" Width="100" Height="30" Margin="5" IsEnabled="False" x:Name="EditButton" BorderBrush="#FF1A3637" Foreground="#FFD5BA95">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1A3637"/>
+                        <GradientStop Color="#FF677C69" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Delete Category" Click="DeleteCategory_Click" Width="100" Height="30" Margin="5" IsEnabled="False" x:Name="DeleteButton" BorderBrush="#FF1A3637" Foreground="#FFD7BB96">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1A3637"/>
+                        <GradientStop Color="#FF677C69" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="MyFinance.Views.BudgetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="750">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="BudgetsListView" Grid.Row="0" SelectionChanged="BudgetsListView_SelectionChanged" BorderBrush="#FF1A3536" Foreground="#FFD6BB96">
+            <ListView.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF667D69"/>
+                    <GradientStop Color="#FF1A3536" Offset="1"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Limit" DisplayMemberBinding="{Binding Limit}"/>
+                    <GridViewColumn Header="Total Income" DisplayMemberBinding="{Binding TotalIncome}"/>
+                    <GridViewColumn Header="Total Expense" DisplayMemberBinding="{Binding TotalExpense}"/>
+                    <GridViewColumn Header="Balance">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0:F2} {1}">
+                                            <Binding Path="Balance"/>
+                                            <Binding Path="DataContext.Currency" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Add Budget" Click="AddBudget_Click" Width="100" Height="30" Margin="5" Foreground="#FFD6BB96" BorderBrush="#FFD6BB96">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1A3637"/>
+                        <GradientStop Color="#FF40534D" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Edit Budget" Click="EditBudget_Click" Width="100" Height="30" Margin="5" IsEnabled="False" x:Name="EditButton" Foreground="#FFD6BB96" BorderBrush="#FFD6BB96">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1A3637"/>
+                        <GradientStop Color="#FF677C69" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Delete Budget" Click="DeleteBudget_Click" Width="100" Height="30" Margin="5" IsEnabled="False" x:Name="DeleteButton" Foreground="#FFD6BB96" BorderBrush="#FFD6BB96">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1A3637"/>
+                        <GradientStop Color="#FF677D69" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
