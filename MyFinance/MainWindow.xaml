@@ -1,15 +1,27 @@
-﻿<Window x:Class="MyFinance.MainWindow"
+<Window x:Class="MyFinance.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyFinance"
         mc:Ignorable="d"
-        Title="MyFinance" Height="500" Width="840" FontSize="16">
+        Title="MyFinance" 
+        Height="500" 
+        Width="840" 
+        ResizeMode="CanMinimize"
+        FontSize="16">
     <StackPanel Orientation="Horizontal">
         <StackPanel x:Name="MenuPanel" Width="40" Background="#FF40534D" HorizontalAlignment="Left">
+            <Button x:Name="RefreshButton" 
+                    Content="R" 
+                    Width="40" 
+                    Height="40" 
+                    Margin="0,10,0,0" 
+                    Click="RefreshButton_Click" 
+                    Background="#FF1A3637" 
+                    Foreground="#FFD5BA95"/>
             <Button x:Name="ExitButton" 
-                    Content="X" 
+                    Content="Ex" 
                     Width="40" 
                     Height="40" 
                     Margin="0,0,0,0" 
@@ -18,3 +30,4 @@
         <StackPanel x:Name="TabsPanel" Width="800" Background="#FF677D69"/>
     </StackPanel>
 </Window>
+
